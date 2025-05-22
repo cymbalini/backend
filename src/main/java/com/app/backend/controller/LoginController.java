@@ -61,8 +61,8 @@ public class LoginController {
     public ResponseEntity<List<User>> searchUsers(@RequestParam String keyword){
         List<User> users = userService.searchUsers(keyword);
         if(users != null) {
-            return new ResponseEntity<>("found", HttpStatus.FOUND);
+            return new ResponseEntity<>(users, HttpStatus.FOUND);
         }else
-            return new ResponseEntity<>("Not Found", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>( HttpStatus.NOT_FOUND);
     }
 }
