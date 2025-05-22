@@ -10,9 +10,7 @@ import java.util.List;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-    @Query("SELECT p FROM User p WHERE "+
-            "LOWER(p.firstname) LIKE LOWER(CONCAT('%', :keyword, '%')) OR"+
-            "LOWER(p.lastname) LIKE LOWER(CONCAT('%', :keyword, '%'))"
+    @Query("SELECT p FROM User p WHERE LOWER(p.firstname) LIKE LOWER(CONCAT('%', :keyword, '%')) OR LOWER(p.lastname) LIKE LOWER(CONCAT('%', :keyword, '%'))"
     )
     List<User> searchUsers(String keyword);
 }
