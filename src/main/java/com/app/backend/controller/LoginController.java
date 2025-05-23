@@ -18,8 +18,8 @@ public class LoginController {
     private UserService userService;
 
     @RequestMapping("/login")
-    public String login(){
-        return "logged";
+    public String login(@RequestBody User user){
+        return userService.verify(user);
     }
 
     @GetMapping("/user/{id}")
@@ -36,8 +36,8 @@ public class LoginController {
         return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
     }
     @PostMapping("/createuser")
-    public void createUser(@RequestBody User user){
-        userService.addUser(user);
+    public User createUser(@RequestBody User user){
+        return userService.addUser(user);
     }
     @PutMapping("/updateuser/{id}")
     public ResponseEntity<String> updateUser(@RequestBody User user, @PathVariable int id){
