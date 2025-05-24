@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api/auth")
+@RequestMapping
 public class LoginController {
 
     @Autowired
