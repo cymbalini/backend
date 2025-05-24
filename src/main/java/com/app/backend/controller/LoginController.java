@@ -1,5 +1,6 @@
 package com.app.backend.controller;
 
+import com.app.backend.model.AuthResponse;
 import com.app.backend.model.User;
 import com.app.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class LoginController {
     private UserService userService;
 
     @RequestMapping("/login")
-    public String login(@RequestBody User user){
+    public AuthResponse login(@RequestBody User user){
         return userService.verify(user);
     }
 

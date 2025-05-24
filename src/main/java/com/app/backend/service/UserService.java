@@ -1,5 +1,6 @@
 package com.app.backend.service;
 
+import com.app.backend.model.AuthResponse;
 import com.app.backend.model.User;
 import com.app.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,12 +49,12 @@ public class UserService {
         return userRepository.searchUsers(keyword);
     }
 
-    public String verify(User user){
+    public AuthResponse verify(User user){
         Authentication authentication =
                 authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(),user.getPassword()));
         if(authentication.isAuthenticated())
-            return jwtService.generateToken(user.getUsername());
-        return "fail";
+            return new AuthResponse(jwtService.generateToken(user.getUsername()),1);
+        return new AuthResponse("fail",0);
 
 
 
