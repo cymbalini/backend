@@ -50,15 +50,19 @@ public class UserService {
     }
 
     public AuthResponse verify(User user){
+
+        User usrid = userRepository.findByUsername(user.getUsername());
+        Integer id = usrid.getId();
+        Integer role = usrid.getRole();
         Authentication authentication =
                 authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(),user.getPassword()));
         if(authentication.isAuthenticated())
-            return new AuthResponse(jwtService.generateToken(user.getUsername()),1);
-        return new AuthResponse("fail",0);
 
 
 
 
+            return new AuthResponse(jwtService.generateToken(user.getUsername()),role, id);
+        return new AuthResponse("fail",0, 0);
 
     }
 }
